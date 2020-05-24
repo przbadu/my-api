@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_24_092726) do
+ActiveRecord::Schema.define(version: 2020_05_24_102602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "issues_tracker_labels", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "color"
+    t.integer "project_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_issues_tracker_labels_on_project_id"
+  end
+
+  create_table "issues_tracker_projects", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_issues_tracker_projects_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -24,4 +42,5 @@ ActiveRecord::Schema.define(version: 2020_05_24_092726) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "issues_tracker_projects", "users"
 end
