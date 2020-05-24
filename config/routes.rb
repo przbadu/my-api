@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   ### All API endpoints for IssuesTracker application.
   namespace :issues_tracker do
-    resources :projects
+    resources :projects do
+      resources :labels
+    end
     resources :issues
   end
 end
