@@ -12,4 +12,6 @@ class User < ApplicationRecord
   
   # associations
   has_many :projects
+  has_many :assignees
+  has_many :issues, through: :assignees
 end

@@ -5,4 +5,6 @@ class IssuesTracker::Label < ApplicationRecord
 
   # associations
   belongs_to :project
+  has_many :issue_labels
+  has_many :issues, through: :issue_labels
 end
