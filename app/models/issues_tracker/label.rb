@@ -4,7 +4,7 @@ class IssuesTracker::Label < ApplicationRecord
   validates :color, presence: true
 
   # associations
-  belongs_to :project
+  belongs_to :project, counter_cache: true
   has_many :issue_labels
   has_many :issues, through: :issue_labels
 end

@@ -5,4 +5,5 @@ class IssuesTracker::Project < ApplicationRecord
   # associations
   belongs_to :user
   has_many :labels
+  has_many :issues
 end
