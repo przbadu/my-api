@@ -1,5 +1,5 @@
 class AuthenticationController < ApplicationController
-  before_action :authenticate_user!, except: :login
+  skip_before_action :authenticate_user!, only: :login
 
   # POST /auth/login
   def login

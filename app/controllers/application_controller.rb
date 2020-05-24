@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  before_action :authenticate_user!
+
   def not_found
     render json: { error: 'not_found' }
   end
@@ -26,5 +28,16 @@ class ApplicationController < ActionController::API
       name: user.name,
       email: user.email
     }, status: :ok
+  end
+
+  def pagination_meta(object)
+    {
+      limit_value: object.limit_value,
+      total_pages: object.total_pages,
+      current_page: object.current_page,
+      next_page: object.next_page,
+      prev_page: object.prev_page,
+      total_count: object.total_count
+    }    
   end
 end

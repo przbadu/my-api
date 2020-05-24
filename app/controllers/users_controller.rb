@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: :create
+  skip_before_action :authenticate_user!, only: :create
   before_action :find_user, except: %i[create index]
 
   # GET /users/{username}
