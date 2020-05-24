@@ -23,6 +23,11 @@ gem 'rack-cors'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Test framework
+  gem 'faker'
+  gem 'rspec-rails', '~> 4.0.0'
+  gem 'factory_bot'
+  gem 'shoulda-matchers'
 end
 
 group :development do
