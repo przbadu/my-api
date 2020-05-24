@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2020_05_24_112831) do
   end
 
   create_table "issues_tracker_issues", force: :cascade do |t|
-    t.string "name"
+    t.string "title"
     t.text "description"
     t.integer "creator_id"
     t.integer "project_id"
