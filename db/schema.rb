@@ -10,10 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_24_102602) do
+ActiveRecord::Schema.define(version: 2020_05_24_112831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "issues_tracker_assignees", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "issue_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["issue_id"], name: "index_issues_tracker_assignees_on_issue_id"
+    t.index ["user_id"], name: "index_issues_tracker_assignees_on_user_id"
+  end
+
+  create_table "issues_tracker_issue_labels", force: :cascade do |t|
+    t.integer "label_id"
+    t.integer "issue_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["issue_id"], name: "index_issues_tracker_issue_labels_on_issue_id"
+    t.index ["label_id"], name: "index_issues_tracker_issue_labels_on_label_id"
+  end
+
+  create_table "issues_tracker_issues", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "creator_id"
+    t.integer "project_id"
+    t.boolean "closed", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["creator_id"], name: "index_issues_tracker_issues_on_creator_id"
+    t.index ["project_id"], name: "index_issues_tracker_issues_on_project_id"
+  end
 
   create_table "issues_tracker_labels", force: :cascade do |t|
     t.string "name"
@@ -30,6 +60,8 @@ ActiveRecord::Schema.define(version: 2020_05_24_102602) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "issues_count", default: 0, null: false
+    t.integer "labels_count", default: 0, null: false
     t.index ["user_id"], name: "index_issues_tracker_projects_on_user_id"
   end
 

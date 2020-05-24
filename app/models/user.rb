@@ -11,7 +11,7 @@ class User < ApplicationRecord
             if: -> { new_record? || !password.nil? }
   
   # associations
-  has_many :projects
-  has_many :assignees
-  has_many :issues, through: :assignees
+  has_many :projects, class_name: 'IssuesTracker::Project'
+  has_many :assignees, class_name: 'IssuesTracker::Assignee'
+  has_many :issues, through: :assignees, class_name: 'IssuesTracker::Issue'
 end

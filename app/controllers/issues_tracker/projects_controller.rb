@@ -3,14 +3,17 @@ class IssuesTracker::ProjectsController < ApplicationController
 
   # GET /issues_tracker/projects
   def index
-    @projects = IssuesTracker::Project.page(params[:page])
+    @projects = current_user.projects.page(params[:page])
 
-    render json: { data: @projects, meta: pagination_meta(@projects) }
+    render json: @projects,
+            meta: pagination_meta(@projects),
+            adapter: 'json',
+            root: 'data'
   end
 
   # POST /issues_tracker/projects
   def create
-    @project = IssuesTracker::Project.new(project_params)
+    @project = current_user.projects.new(project_params)
     
     if @project.save
       render json: @project
@@ -26,7 +29,7 @@ class IssuesTracker::ProjectsController < ApplicationController
 
   # PUT /issues_tracker/projects/1
   def update
-    if @project.IssuesTracker::Project.update(project_params)
+    if @project.update(project_params)
       render json: @project
     else
       render json: { error: @project.errors }, status: :unprocessable_entity
@@ -42,7 +45,7 @@ class IssuesTracker::ProjectsController < ApplicationController
   private
 
   def set_project
-    @project ||= Project.find(params[:id])
+    @project ||= current_user.projects.find(params[:id])
   end
 
   def project_params

@@ -18,6 +18,10 @@ class ApplicationController < ActionController::API
     end
   end
 
+  def current_user
+    @current_user
+  end
+
   def auth_response(user)
     token = JwtService.encode(user_id: user.id)
     time = Time.now + 24.hours.to_i
