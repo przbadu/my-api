@@ -11,4 +11,8 @@ Rails.application.routes.draw do
     end
     resources :issues
   end
+
+  namespace :import do
+    resources :expenses, only: :create
+  end
 end

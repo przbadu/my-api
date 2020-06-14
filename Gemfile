@@ -27,7 +27,7 @@ gem 'rack-attack'
 # JSON Api
 gem 'active_model_serializers', '~> 0.10.0'
 # pagination
-gem 'kaminari'
+gem "kaminari", ">= 1.2.1"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
